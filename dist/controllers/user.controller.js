@@ -12,29 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Import the config
-const config_1 = __importDefault(require("./config/config"));
-// Import Mongoose
-const mongoose_1 = __importDefault(require("mongoose"));
-const express_1 = __importDefault(require("express"));
-const body_parser_1 = __importDefault(require("body-parser"));
-// import routes from "./routers/users";
-const port = 5000;
-const app = (0, express_1.default)();
-app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(express_1.default.json());
-app.get("/", (req, res) => {
-    res.send("Welcome aboard.");
+exports.signup = void 0;
+const user_model_1 = __importDefault(require("../models/user.model"));
+const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const created = (input) => __awaiter(void 0, void 0, void 0, function* () {
+            return yield user_model_1.default.create(input);
+        });
+        const user = yield created(req.body);
+        return user;
+    }
+    catch (error) {
+        return res.status(409).json({
+            message: error.message
+        });
+    }
 });
-app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(`Listening to port: ${port}`);
-    //   routes(app);
-}));
-mongoose_1.default
-    .connect(config_1.default.mongoURI)
-    .then(() => {
-    console.log('Connected to MongoDB');
-})
-    .catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-});
+exports.signup = signup;
