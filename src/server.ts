@@ -5,7 +5,7 @@ import config from './config/config';
 import mongoose from 'mongoose';
 import express, {Request, Response, urlencoded} from "express";
 import bodyParser from "body-parser";
-// import routes from "./routers/users";
+import routes from "./routes/user.routes";
 
 const port = 5000
 const app = express();
@@ -19,7 +19,7 @@ app.get("/", (req: Request, res: Response)=>{
 
 app.listen(port, async()=>{
   console.log(`Listening to port: ${port}`);
-//   routes(app);
+  routes(app);
 });
 
 

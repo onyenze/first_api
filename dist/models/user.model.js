@@ -32,12 +32,12 @@ const userschema = new mongoose_1.default.Schema({
 userschema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         let user = this;
-        if (user.isModified('password')) {
+        if (!user.isModified('password')) {
             return next();
         }
         else {
-            const salt = yield bcrypt_1.default.genSalt(10);
-            const hash = yield bcrypt_1.default.hashSync(user.password, salt);
+            const salt = bcrypt_1.default.genSaltSync(10);
+            const hash = bcrypt_1.default.hashSync(user.password, salt);
             user.password = hash;
             return next();
         }

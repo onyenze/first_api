@@ -20,7 +20,9 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return yield user_model_1.default.create(input);
         });
         const user = yield created(req.body);
-        return user;
+        res.status(201).json({
+            data: user
+        });
     }
     catch (error) {
         return res.status(409).json({

@@ -18,7 +18,7 @@ const config_1 = __importDefault(require("./config/config"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
-// import routes from "./routers/users";
+const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const port = 5000;
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.urlencoded({ extended: false }));
@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 });
 app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`Listening to port: ${port}`);
-    //   routes(app);
+    (0, user_routes_1.default)(app);
 }));
 mongoose_1.default
     .connect(config_1.default.mongoURI)

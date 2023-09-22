@@ -4,8 +4,12 @@ import { userSchema } from "../schemas/user.schema";
 import validate from "../middlewares/validate";
 
 
-const route = (app:Express)=>{
-    app.post("api/signup",validate(userSchema),signup)
+const routes = (app:Express)=>{
+    app.get("/welcome", (req:Request, res: Response)=>{
+        res.send("Welcome Onboard.")
+      });
+
+    app.post("/api/signup",validate(userSchema),signup)
 }
 
-export default route
+export default routes
